@@ -1,3 +1,5 @@
+#Utility function to make 9x9 SUDOKU board, helper class and variables
+
 import queue
 import time
 from copy import deepcopy
@@ -35,7 +37,7 @@ cols = digits
 squares = cross(rows, cols)
 
 class Sudoku:
-
+	#Initialize the Sudoku class
 	def __init__ (self, domain = digits, grid = ""):
 		# choose_Dimenion(dim_size)
 		self.varibales = squares

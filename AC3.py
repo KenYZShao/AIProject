@@ -1,20 +1,25 @@
+#Implement the AC3 Algorithm
+
 from Utilities import *
 import queue
 import time
 from copy import deepcopy
 
+# function to check the if the given assisgnment is consistent or not
 def isconsistentAC3(Sudoku, x, Xi, Xj):
 	for y in Sudoku.values[Xj]:
 		if Xj in Sudoku.peers[Xi] and y!=x:
 			return True
 	return False
 
+#function to check is the sudoku is finished or not
 def isCompleteAC3(Sudoku):
 	for variables in squares:
 		if len(Sudoku.values[variables])>1:
 			return False
 	return True
 
+#Revice AC3 algorithm
 def ReviseAC3(Sudoku, Xi, Xj):
 	isRevised = False
 	values = set(Sudoku.values[Xi])
@@ -26,6 +31,7 @@ def ReviseAC3(Sudoku, Xi, Xj):
 			
 	return isRevised
 
+#Display the sudoku in a structured format
 def display(values):
 	for r in rows:
 		if r in 'DG':
@@ -37,12 +43,14 @@ def display(values):
 				print(values[r+c], ' ',end=' ')
 		print(end='\n')
 
+# writer function to write the output in the txt file
 def write(values):
 	solves_sudoku = ""
 	for variables in squares:
 		solves_sudoku = solves_sudoku + values[variables]
 	return solves_sudoku
 
+# Main AC3 Algorithm
 def AC3(Sudoku):
 	q = queue.Queue()
 

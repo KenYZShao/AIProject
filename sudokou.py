@@ -1,3 +1,5 @@
+#Main file which calls and implements all
+
 import queue
 import time
 import sys
@@ -9,6 +11,7 @@ from Backtracking import *
 import matplotlib.pyplot as plt
 import numpy as np
 
+#convert the sudoku into a list of list 
 def converttoList(str_grid):
     # print(str_grid)
     split_strings = []
@@ -27,6 +30,7 @@ def converttoList(str_grid):
     result = [[int(float(j)) for j in i] for i in listoflist]
     return result
 
+#function to solve sudoku using AC3 + Backtracking + Forward Check + MRV  + LCV
 def solve_sudoku(inputFile, outputFile):
     # size = dim
     backtrack_execution_times = []
@@ -75,6 +79,7 @@ def solve_sudoku(inputFile, outputFile):
     print ("Time taken to solve the puzzles is: ", time.time()-start)
     return total_backtrack_execution_times
 
+#fucntion to solve sudoku using BFS
 def solve_sudoku_bfs(inputFile, outputFile):
     # size = dim
     bfs_execution_times = []
@@ -125,6 +130,7 @@ def solve_sudoku_bfs(inputFile, outputFile):
     print ("Time taken to solve the puzzles is: ", time.time()-start)
     return total_bfs_execution_times
 
+#function to solve sudoku using DFS
 def solve_sudoku_dfs(inputFile, outputFile):
     # size = dim
     dfs_execution_times = []
@@ -178,6 +184,11 @@ def solve_sudoku_dfs(inputFile, outputFile):
 #THE MAIN FUNCTION GOES HERE
 if __name__ == "__main__":
     
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument('board')
+    # args = parser.parse_args()
+    # print(args)
+    #Store excexution time returned from the functions
     backtrack_execution_time_easy = []
     backtrack_execution_time_hard = []
     backtrack_execution_time_top95 = []
@@ -190,6 +201,7 @@ if __name__ == "__main__":
     dfs_execution_time_hard = []
     dfs_execution_time_top95 = []
 
+    #specify sudoku size and choose which utilities file to import
     dimension = "9"
     if (dimension == "6"):
         from Utilities6x6 import *
@@ -211,7 +223,7 @@ if __name__ == "__main__":
     solved_top95_dfs = "/Users/Ayush/Desktop/CS7IS3/top95_output_dfs.txt"
     solved_top95 = "/Users/Ayush/Desktop/CS7IS3/top95_output.txt"
  
-
+    # SOLVE ALL FOR EASY PUZZLE
     # bfs_execution_time_easy = solve_sudoku_bfs(easy,solved_easy_bfs)
     # dfs_execution_time_easy = solve_sudoku_dfs(easy, solved_easy_dfs)
     # backtrack_execution_time_easy = solve_sudoku(easy,solved_easy)
@@ -221,6 +233,7 @@ if __name__ == "__main__":
     # Total_Exe_time_easy_50.append(dfs_execution_time_easy)
     # Total_Exe_time_easy_50.append(backtrack_execution_time_easy)
 
+    # SOLVE ALL FOR HARDEST PUZZLE
     # bfs_execution_time_hard = solve_sudoku_bfs(hardest,solved_hardest_bfs)
     # dfs_execution_time_hard = solve_sudoku_dfs(hardest, solved_hardest_dfs)
     # backtrack_execution_time_hard = solve_sudoku(hardest,solved_hardest)
@@ -231,6 +244,7 @@ if __name__ == "__main__":
     # Total_Exe_time_hard.append(dfs_execution_time_hard)
     # Total_Exe_time_hard.append(backtrack_execution_time_hard)
 
+    # SOLVE ALL FOR TOP/EXPERT PUZZLE
     backtrack_execution_time_top95 =  solve_sudoku(top95,solved_top95)
     dfs_execution_time_top95 =   solve_sudoku_dfs(top95, solved_top95_dfs)
     bfs_execution_time_top95 =  solve_sudoku_bfs(top95,solved_top95_bfs)
@@ -241,44 +255,46 @@ if __name__ == "__main__":
     Total_Exe_time_top95.append(dfs_execution_time_top95)
     Total_Exe_time_top95.append(backtrack_execution_time_top95)
 
-    # x_axis = ["BFS", "DFS", "Backtrack" ]
-    # x_pos = [i for i, _ in enumerate(x_axis)]
-    # plt.bar(x_axis, Total_Exe_time_easy_50)
-    # plt.title("Execution Times for Easy50")
+    # PLOT THE TIME EXECUTION GRAPH
+
+    # x_axis1 = ["BFS", "DFS", "AC3+Backtracking+FC+MRV+LCV" ]
+    # x_pos1 = [i for i, _ in enumerate(x_axis1)]
+    # plt.bar(x_axis1, Total_Exe_time_easy_50)
+    # plt.title("Execution Times for Easy50 puzzle")
     # plt.xlabel("Algorithms")
     # plt.ylabel("Time [s]")
     # plt.minorticks_on()
-    # # plt.legend(["BFS","DFS","Backtracking"], loc='upper left')
+    # # plt.legend(["BFS","DFS","AC3+Backtracking+FC+MRV+LCV"], loc='upper left')
     # for i, v in enumerate(Total_Exe_time_easy_50):
-    #     plt.text(x_pos[i] - 0.41, v + 0.51, str(v))
-    # plt.savefig('2execution_timesEASY50.png')
+    #     plt.text(x_pos1[i] - 0.41, v + 0.51, str(v))
+    # plt.savefig('execution_times_easy50.png')
     # plt.clf()
 
 
-    # x_axis = ["BFS", "DFS", "Backtrack" ]
-    # x_pos = [i for i, _ in enumerate(x_axis)]
-    # plt.bar(x_axis, Total_Exe_time_top95)
-    # plt.title("Execution Times for Easy50")
+    # x_axis2 = ["BFS", "DFS", "AC3+Backtracking+FC+MRV+LCV" ]
+    # x_pos2 = [i for i, _ in enumerate(x_axis2)]
+    # plt.bar(x_axis2, Total_Exe_time_hard)
+    # plt.title("Execution Times for hardest puzzle")
     # plt.xlabel("Algorithms")
     # plt.ylabel("Time [s]")
     # plt.minorticks_on()
     # # plt.legend(["BFS","DFS","Backtracking"], loc='upper left')
     # for i, v in enumerate(Total_Exe_time_hard):
-    #     plt.text(x_pos[i] - 0.41, v + 0.51, str(v))
+    #     plt.text(x_pos2[i] - 0.41, v + 0.51, str(v))
     # plt.savefig('execution_times_hardest.png')
     # plt.clf()
 
-    x_axis = ["BFS", "DFS", "Backtrack" ]
-    x_pos = [i for i, _ in enumerate(x_axis)]
-    plt.bar(x_axis, Total_Exe_time_top95)
+    x_axis3 = ["BFS", "DFS", "AC3+Backtracking+FC+MRV+LCV" ]
+    x_pos3 = [i for i, _ in enumerate(x_axis3)]
+    plt.bar(x_axis3, Total_Exe_time_top95)
     plt.title("Execution Times for Top95")
     plt.xlabel("Algorithms")
     plt.ylabel("Time [s]")
     plt.minorticks_on()
     # plt.legend(["BFS","DFS","Backtracking"], loc='upper left')
     for i, v in enumerate(Total_Exe_time_top95):
-        plt.text(x_pos[i] - 0.41, v + 0.51, str(v))
-    plt.savefig('execution_times_hardest.png')
+        plt.text(x_pos3[i] - 0.41, v + 0.51, str(v))
+    plt.savefig('execution_times_top95.png')
     plt.clf()
 
 
